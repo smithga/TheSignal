@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+*.user
+appsettings.Local.json
+.env
+
+# Vendored local voice tools/models and the voice-bridge venv (see README
+# "Setup: local voice rehearsal") — machine-local installs, not source.
+vendor/
+.venv-voice/
+
+# Real player PII (names/emails/phone numbers) - edit game/players/players.example.json
+# for the template, keep real data in players.json which stays local-only.
+game/players/players.json

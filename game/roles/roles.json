@@ -1,0 +1,18 @@
+[
+  {
+    "id": "host",
+    "description": "Hosts the gathering and is Evelyn's intended point of contact."
+  },
+  {
+    "id": "skeptic",
+    "description": "Questions everything Evelyn says and pushes back the hardest."
+  },
+  {
+    "id": "believer",
+    "description": "Trusts Evelyn quickly and tries to keep the group calm."
+  },
+  {
+    "id": "researcher",
+    "description": "Takes notes, tries to piece together the clues methodically."
+  }
+]

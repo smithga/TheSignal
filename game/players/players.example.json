@@ -1,0 +1,33 @@
+[
+  {
+    "id": "gary",
+    "name": "Gary Smith",
+    "age": 41,
+    "physicalAppearance": "Hosting the party, usually near the TV.",
+    "background": "The person Evelyn specifically knows and asks for by name.",
+    "career": "Host",
+    "email": "gary@example.com",
+    "phone": "+1-555-0100",
+    "role": "host"
+  },
+  {
+    "id": "player-1",
+    "name": "Jamie Rivera",
+    "age": 29,
+    "physicalAppearance": "Tall, short dark hair, glasses, usually wearing a flannel shirt.",
+    "background": "Grew up in Portland, studied architecture, recently moved to the city.",
+    "career": "Structural engineer",
+    "email": "jamie.rivera@example.com",
+    "phone": "+1-555-0101"
+  },
+  {
+    "id": "player-2",
+    "name": "Priya Shah",
+    "age": 34,
+    "physicalAppearance": "Medium height, curly hair, often wears bright colors.",
+    "background": "Competitive debater in college, now runs a small nonprofit.",
+    "career": "Nonprofit director",
+    "email": "priya.shah@example.com",
+    "phone": "+1-555-0102"
+  }
+]

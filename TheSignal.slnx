@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TheSignal.Anam.Server/TheSignal.Anam.Server.csproj" />
+    <Project Path="src/TheSignal.LemonSlice.Server/TheSignal.LemonSlice.Server.csproj" />
+    <Project Path="src/TheSignal.Server/TheSignal.Server.csproj" />
+    <Project Path="src/TheSignal.Local.Server/TheSignal.Local.Server.csproj" />
+    <Project Path="src/TheSignal.AtlasTest/TheSignal.AtlasTest.csproj" />
+  </Folder>
+</Solution>

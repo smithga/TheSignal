@@ -1,0 +1,460 @@
+:root {
+  color-scheme: dark;
+  --accent: #ff2b4d;
+  --text: #f2f2f2;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+#videoContainer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+}
+
+#persona-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#videoPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+#videoPlaceholder h1 {
+  margin: 0;
+  font-size: 4rem;
+  letter-spacing: 0.4rem;
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(255, 43, 77, 0.6);
+}
+
+#videoPlaceholder p {
+  margin: 0;
+  opacity: 0.6;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+#videoPlaceholder[hidden] {
+  display: none;
+}
+
+/* Subtle CRT scanline overlay to sell the "hijacked broadcast" look */
+#scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.08) 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+.controls {
+  position: absolute;
+  left: 50%;
+  bottom: 2.5rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+select {
+  background: #17171d;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.45rem;
+}
+
+.controls label { font-size: 0.75rem; opacity: 0.75; }
+
+#developmentStage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 5rem 25rem 7rem 3rem;
+  background: radial-gradient(circle at center, #20202c 0, #08080c 65%);
+}
+
+#developmentStage[hidden] { display: none; }
+
+.performance-card {
+  width: min(720px, 100%);
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-left: 5px solid var(--accent);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.performance-card[data-channel="textMessage"],
+#developmentStage[data-channel="textMessage"] .performance-card {
+  border-left-color: #50c8ff;
+}
+
+.performance-meta { display: flex; justify-content: space-between; gap: 1rem; }
+#performanceActor { color: var(--accent); text-transform: uppercase; letter-spacing: 0.12rem; }
+#performanceSource, #performanceDirection { opacity: 0.55; }
+#performanceText { font-size: clamp(1.3rem, 3vw, 2.4rem); line-height: 1.35; }
+
+.performance-history-panel {
+  position: absolute;
+  left: 2rem;
+  bottom: 6.5rem;
+  width: min(560px, calc(100vw - 28rem));
+  max-height: 25vh;
+  overflow: auto;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+}
+
+.performance-history-panel h2 { margin: 0 0 0.5rem; font-size: 0.8rem; }
+#performanceHistory { margin: 0; padding-left: 1.5rem; font-size: 0.78rem; }
+#performanceHistory li { margin-bottom: 0.35rem; }
+#performanceHistory li[data-channel="textMessage"] { color: #8bdcff; }
+
+.paid-services-warning {
+  color: #ffd36a;
+  border: 1px solid rgba(255, 211, 106, 0.35);
+  border-radius: 6px;
+  padding: 0.6rem;
+  font-size: 0.75rem;
+}
+
+#performanceControls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+}
+
+#performanceControls button { border-radius: 6px; padding: 0.45rem; font-size: 0.75rem; }
+
+#status {
+  opacity: 0.85;
+  font-size: 0.85rem;
+  letter-spacing: 0.05rem;
+}
+
+#directorToggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  font-size: 1.3rem;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 10;
+}
+
+#directorPanel {
+  position: absolute;
+  top: 5rem;
+  right: 1.5rem;
+  width: 340px;
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+  background: rgba(10, 10, 14, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+#directorPanel[hidden] {
+  display: none;
+}
+
+#directorPanel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+.director-hint {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  line-height: 1.4;
+}
+
+.scene {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.scene h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.scene-line-button, .scene-context-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.35;
+}
+
+.scene-line-button:hover, .scene-context-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.scene-context-button {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.scene-line-textmessage {
+  background: rgba(80, 200, 255, 0.12);
+  border: 1px dashed rgba(80, 200, 255, 0.4);
+  font-style: italic;
+}
+
+.scene-line-improvise {
+  background: rgba(255, 200, 80, 0.12);
+  border: 1px dashed rgba(255, 200, 80, 0.5);
+}
+
+.scene[data-fired="true"] {
+  opacity: 0.5;
+}
+
+.scene[data-state="completed"] { opacity: 0.5; }
+.scene[data-state="active"] { border-color: var(--accent); }
+.scene[data-state="failed"] { border-color: #ffb02b; }
+
+.scene-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.scene-time {
+  font-size: 0.7rem;
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.scene-play-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#rolesPanel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#rolesPanel button {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+}
+
+#rolesSummary {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+#playerInputForm {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+}
+
+#playerInputForm[hidden] { display: none; }
+
+#playerInputText {
+  width: 100%;
+  resize: vertical;
+  background: #17171d;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.55rem;
+  font: inherit;
+}
+
+#playerInputForm button { border-radius: 6px; padding: 0.45rem; font-size: 0.75rem; }
+
+#voiceInputPanel {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+}
+
+#voiceInputPanel[hidden] { display: none; }
+
+#voiceInputButton {
+  border-radius: 6px;
+  padding: 0.45rem;
+  font-size: 0.75rem;
+  touch-action: none;
+  user-select: none;
+}
+
+#voiceInputButton[data-recording="true"] {
+  background: #50c8ff;
+  color: #000;
+}
+
+#voiceInputStatus {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  line-height: 1.35;
+}
+
+#clockPanel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#clockDisplay {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 3.5rem;
+}
+
+#clockPanel button {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+}
+
+/* "Signal lost" blackout overlay: static noise + label, shown between scenes */
+#signalLostOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+#signalLostOverlay[hidden] {
+  display: none;
+}
+
+#signalLostOverlay p {
+  position: relative;
+  color: #fff;
+  font-size: 1.4rem;
+  letter-spacing: 0.4rem;
+  opacity: 0.85;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+#staticNoise {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 70%);
+  background-size: 100% 3px, 200% 200%;
+  animation: staticFlicker 0.15s steps(2) infinite;
+  opacity: 0.6;
+}
+
+@keyframes staticFlicker {
+  0% { background-position: 0 0, 0% 0%; }
+  50% { background-position: 0 2px, 20% 30%; }
+  100% { background-position: 0 0, 0% 0%; }
+}

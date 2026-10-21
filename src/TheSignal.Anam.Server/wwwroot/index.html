@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Signal — Director Console</title>
+  <link rel="stylesheet" href="style.css?v=localvoice-1" />
+</head>
+<body>
+  <div id="videoContainer">
+    <video id="persona-video" autoplay playsinline></video>
+    <div id="videoPlaceholder">
+      <h1>THE SIGNAL</h1>
+      <p>Broadcast interrupted</p>
+    </div>
+    <section id="developmentStage" hidden>
+      <div class="performance-card">
+        <div class="performance-meta">
+          <strong id="performanceActor">Actor</strong>
+          <span id="performanceSource"></span>
+        </div>
+        <p id="performanceText">Waiting for an utterance.</p>
+        <small id="performanceDirection">No performance direction</small>
+      </div>
+      <section class="performance-history-panel">
+        <h2>Performance history</h2>
+        <ol id="performanceHistory"></ol>
+      </section>
+    </section>
+    <div id="scanlines"></div>
+    <div id="signalLostOverlay" hidden>
+      <div id="staticNoise"></div>
+      <p>SIGNAL LOST</p>
+    </div>
+    <div class="controls">
+      <label for="rendererMode">Renderer</label>
+      <select id="rendererMode">
+        <option value="development" selected>Development (free)</option>
+        <option value="local">Local voice (free, bridge)</option>
+        <option value="anam">Anam (paid)</option>
+      </select>
+      <button id="startButton">Start Renderer</button>
+      <button id="stopButton" disabled>Stop</button>
+      <span id="status">Idle</span>
+    </div>
+    <button id="directorToggle" title="Toggle director panel (scripted scenes)">🎬</button>
+    <aside id="directorPanel" hidden>
+      <h2>Scenes</h2>
+      <p class="director-hint">Scene rules and dialog resolve on the server. The selected renderer only receives finalized actor utterances.</p>
+      <p id="paidServicesWarning" class="paid-services-warning" hidden>Anam is a paid production renderer. Starting it requests a session token.</p>
+
+      <div id="performanceControls">
+        <label for="completionMode">Development completion</label>
+        <select id="completionMode">
+          <option value="immediate" selected>Immediate</option>
+          <option value="manual">Wait for director</option>
+        </select>
+        <button id="completePerformanceButton">Complete current</button>
+      </div>
+
+      <div id="rolesPanel">
+        <button id="assignRolesButton">🎲 Assign Roles</button>
+        <span id="rolesSummary"></span>
+      </div>
+
+      <form id="playerInputForm" hidden>
+        <label for="playerInputText">Typed room input</label>
+        <textarea id="playerInputText" maxlength="2000" rows="3" placeholder="Enter a player message" required></textarea>
+        <button id="sendPlayerInputButton" type="submit">Send to Evelyn</button>
+      </form>
+
+      <div id="voiceInputPanel" hidden>
+        <label for="voiceInputButton">Voice room input (push-to-talk)</label>
+        <button id="voiceInputButton" type="button" disabled>Hold to Talk</button>
+        <span id="voiceInputStatus"></span>
+      </div>
+
+      <div id="clockPanel">
+        <span id="clockDisplay">00:00</span>
+        <button id="clockStartButton">Start Game Clock</button>
+        <button id="clockPauseButton" disabled>Pause</button>
+        <button id="clockResetButton">Reset</button>
+      </div>
+
+      <div id="sceneList"></div>
+    </aside>
+  </div>
+
+  <script type="module" src="app.js?v=localvoice-1"></script>
+</body>
+</html>
